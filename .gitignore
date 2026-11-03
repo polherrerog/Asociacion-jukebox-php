@@ -1,0 +1,14 @@
+# Entorno
+.env
+.env.*
+
+# Docker
+/docker/data/*.json
+!docker/data/.gitkeep
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# PHP
+*.log

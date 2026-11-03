@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "usuario": "admin",
+    "email": "admin@jukebox.local",
+    "password": "admin123",
+    "rol": "admin"
+  },
+  {
+    "id": 2,
+    "usuario": "ana",
+    "email": "ana@jukebox.local",
+    "password": "ana123",
+    "rol": "usuario"
+  }
+]

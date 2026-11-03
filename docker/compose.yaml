@@ -1,0 +1,12 @@
+services:
+  web:
+    build:
+      context: .
+    container_name: asociacion-jukebox-etapa2
+    ports:
+      - "8091:80"
+    volumes:
+      - ./src:/var/www/html
+      - ./data:/var/www/data
+    environment:
+      APP_ENV: development
