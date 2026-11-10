@@ -1,18 +1,26 @@
 # Bloque 4: Construir el catálogo musical
 
-## 1. Encargo del cliente
-Generar listas estructuradas mediante bucles e implementar la primera colección del catálogo usando un array asociativo multidimensional.
+## 1. ¿Qué hace este bloque? (Objetivo)
+Aprender a gestionar colecciones de datos (arrays multidimensionales) y recorrerlas dinámicamente mediante bucles (`foreach`) para presentar listas de reproducción y una tabla completa con el catálogo de canciones.
 
-## 2. Archivos modificados y creados
-- `src/06-listas.php`: Ejemplos con bucles `for`, `while` y `foreach`.
-- `src/07-catalogo.php`: Definición de la colección `$songs` con claves `id`, `title`, `artist`, `category`, `duration` y `src`.
+## 2. Archivos utilizados y explicación sencilla
+- **`src/06-listas.php`**: Define un array asociativo con dos listas de reproducción ("Favoritas" y "Descubrir"). Utiliza un bucle `foreach` anidado para mostrar el nombre de la lista y cada una de las canciones que contiene en elementos `<ul>` y `<li>`.
+- **`src/07-catalogo.php`**: Carga una colección de canciones desde `lib/catalogo-inicial.php` y recorre cada elemento para generar una tabla HTML (`<table>`) con columnas para Título, Artista, Género y Duración.
 
-## 3. Pruebas de verificación
+### Validación de catálogo vacío:
+Si la colección estuviese vacía (`empty($catalogo)`), se muestra un mensaje informativo indicando *"Todavía no hay canciones"* antes de intentar ejecutar el bucle.
 
-### Comprobación de catálogo con datos
-- Resultado: Recorrido con `foreach` que genera una lista en HTML con todas las canciones sin duplicar código de presentación.
+## 3. Pruebas y Capturas
 
-### Comprobación de catálogo vacío
-- Condición: `$songs = [];`
-- Resultado Observado: Muestra el mensaje alternativo `"Todavía no hay canciones"`.
-- Explicación: Se valida la condición `empty($songs)` antes de ejecutar la estructura repetitiva.
+### A. Listas de Reproducción (`06-listas.php`)
+Acceso a `http://localhost:8090/06-listas.php` mostrando las agrupaciones de pistas.
+
+![Listas de reproducción anidadas](capturas/bloque-04-listas.png)
+
+### B. Tabla del Catálogo Musical (`07-catalogo.php`)
+Acceso a `http://localhost:8090/07-catalogo.php` mostrando la tabla con todos los registros del array.
+
+![Tabla con el catálogo completo de canciones](capturas/bloque-04-catalogo.png)
+
+## 4. Resultado
+Se generan tablas y listas dinámicas sin duplicar etiquetas HTML manualmente.

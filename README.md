@@ -9,6 +9,11 @@ Proyecto docente para practicar PHP con un jukebox y distintos bloques de ejerci
 - `data-ejemplo/`: archivos JSON para pruebas y copias limpias
 - `docs/`: resumen de cada bloque
 
+## Documentación
+
+- **[DOCUMENTACION.docx](DOCUMENTACION.docx)**: Documento Word oficial con explicaciones sencillas y capturas de todos los bloques (1 al 12).
+- `docs/`: Guías individuales de cada bloque con sus capturas asociadas en `docs/capturas/`.
+
 ## Etapa 1
 
 Se ejecuta con Docker en el puerto `8090`.

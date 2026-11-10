@@ -1,23 +1,29 @@
 # Bloque 3: Calcular y decidir sobre una canción
 
-## 1. Encargo del cliente
-Transformar la duración en segundos a minutos y segundos, y aplicar reglas de negocio para clasificar la duración de los temas.
+## 1. ¿Qué hace este bloque? (Objetivo)
+Aprender a realizar operaciones aritméticas para transformar unidades (de segundos a minutos:segundos) y aplicar lógica condicional (`if / else`) para tomar decisiones basadas en el estado de una pista musical, usando comparación estricta (`===`).
 
-## 2. Archivos modificados y creados
-- `src/04-duracion.php`: Cálculo aritmético con `intdiv()` y operador resto `%`.
-- `src/05-estado-cancion.php`: Estructura condicional `if / elseif / else`.
+## 2. Archivos utilizados y explicación sencilla
+- **`src/04-duracion.php`**: Define la función `formatoDuracion(int $segundos)`. Emplea:
+  - `intdiv($segundos, 60)` para obtener los minutos enteros.
+  - `$segundos % 60` (operador resto) para calcular los segundos restantes.
+  - `sprintf('%02d:%02d', ...)` para formatear con dos dígitos (ej. 185 segundos -> `03:05`).
+- **`src/05-estado-cancion.php`**: Evalúa una bandera booleana (`'reproduciendo' => true`). Si está activa muestra el mensaje en verde; de lo contrario, indica que está en pausa.
 
-## 3. Pruebas de verificación
+### Comparación estricta (`===`):
+Se usa `===` en lugar de `==` para garantizar que coincidan tanto el **valor** como el **tipo de dato** (evitando que el número `185` coincida falsamente con el texto `'185'`).
 
-### Tabla de duraciones evaluadas
-| Segundos (`$duration`) | Minutos (`intdiv`) | Segundos (`%`) | Clasificación devuelta |
-| :--- | :--- | :--- | :--- |
-| `0` | 0 | 0 | "Sin duración" |
-| `1` | 0 | 1 | "Hasta cuatro minutos" |
-| `240` | 4 | 0 | "Hasta cuatro minutos" |
-| `241` | 4 | 1 | "Más de cuatro minutos" |
+## 3. Pruebas y Capturas
 
-### Comparación estricta
-- Comprobación: `$duration === '185'`
-- Resultado: `false`.
-- Explicación: Se utiliza la comparación estricta (`===`) para verificar tanto el valor como el tipo de dato (entero vs. cadena), evitando conversiones implícitas.
+### A. Duración Formateada (`04-duracion.php`)
+Acceso a `http://localhost:8090/04-duracion.php` mostrando la transformación de 185s en formato musical `03:05`.
+
+![Duración formateada en minutos y segundos](capturas/bloque-03-duracion.png)
+
+### B. Estado de Reproducción (`05-estado-cancion.php`)
+Acceso a `http://localhost:8090/05-estado-cancion.php` evaluando la condición `reproduciendo === true`.
+
+![Estado de la canción en verde](capturas/bloque-03-estado.png)
+
+## 4. Resultado
+Las operaciones matemáticas y las condiciones se evalúan con precisión sin conversiones implícitas de tipo.

@@ -1,16 +1,19 @@
 [
   {
     "id": 1,
-    "titulo": "Mare Nostrum",
-    "artista": "La Banda",
-    "duracion": 210,
-    "genero": "Rock"
+    "titulo": "Pre-race Music: 8Va Curves",
+    "artista": "Yuto Takei",
+    "duracion": 175,
+    "genero": "Breakbeat",
+    "src": "../assets/audio/8va_curves.mp3"
+
   },
   {
     "id": 2,
-    "titulo": "Noche de verano",
-    "artista": "Sol y Luna",
-    "duracion": 185,
-    "genero": "Pop"
+    "titulo": "Dancing",
+    "artista": "Vicky Vale",
+    "duracion": 289,
+    "genero": "Eurobeat",
+    "src": "../assets/audio/dancing.mp3"
   }
 ]

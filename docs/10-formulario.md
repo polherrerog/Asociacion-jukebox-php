@@ -1,14 +1,29 @@
 # Bloque 10: Consultar y gestionar canciones (CRUD)
 
-## 1. Encargo del cliente
-Implementar las operaciones de Creación, Lectura, Edición y Eliminación del catálogo musical sobre el JSON persistente.
+## 1. ¿Qué hace este bloque? (Objetivo)
+Implementar un sistema completo de **CRUD** (*Create, Read, Update, Delete*) para que los usuarios autenticados puedan consultar el catálogo, registrar nuevas pistas, editarlas y eliminarlas con persistencia real sobre el archivo `canciones.json`.
 
-## 2. Archivos modificados y creados
-- `docker/src/canciones.php`: Lista completa con acciones (Read).
-- `docker/src/cancion-nueva.php`: Alta con asignación automática de ID (Create).
-- `docker/src/cancion-editar.php`: Edición de datos por ID mediante `POST` (Update).
-- `docker/src/cancion-eliminar.php`: Confirmación y borrado con reordenación de índices (Delete).
+## 2. Archivos utilizados y explicación sencilla
+- **`docker/src/canciones.php` (Read)**: Muestra el listado de todas las canciones guardadas, con botones de acción para *Añadir canción*, *Editar* y *Eliminar*. Requiere inicio de sesión previo (`requireLogin()`).
+- **`docker/src/cancion-nueva.php` (Create)**: Formulario de alta. Valida que los campos no vengan vacíos, calcula automáticamente el siguiente identificador único:
+  ```php
+  $nuevoId = count($canciones) ? max(array_column($canciones, 'id')) + 1 : 1;
+  ```
+  y guarda la canción en el archivo JSON.
+- **`docker/src/cancion-editar.php` (Update/Detalle)**: Busca la canción por su ID (`$_GET['id']`) y muestra sus detalles para modificarla o confirmarla.
+- **`docker/src/cancion-eliminar.php` (Delete)**: Filtra el array eliminando la canción con el ID indicado y utiliza `array_values()` para reconstruir los índices numéricos, asegurando que el JSON exportado se mantenga como un array válido y ordenado.
 
-## 3. Pruebas de verificación
-- ID vs Posición: Los registros se buscan explícitamente por el campo `'id' === $id`, asegurando que la eliminación de un elemento intermedio no afecte las operaciones de los demás.
-- Uso de `array_values`: Al borrar con `unset()`, se reconstruyen los índices para garantizar que el resultado exportado continúe siendo un array JSON estructurado.
+## 3. Pruebas y Capturas
+
+### A. Listado General con Acciones CRUD (`canciones.php`)
+Acceso a `http://localhost:8091/canciones.php` con el listado de pistas y botones de gestión.
+
+![Listado de canciones con opciones CRUD](capturas/bloque-10-crud-listar.png)
+
+### B. Formulario de Alta de Canción (`cancion-nueva.php`)
+Acceso a `http://localhost:8091/cancion-nueva.php` con los campos Título, Artista y Duración.
+
+![Formulario de alta de nueva canción](capturas/bloque-10-crud-nuevo.png)
+
+## 4. Resultado
+El sistema gestiona el ciclo de vida completo de las canciones sin corromper el archivo JSON ni duplicar identificadores.

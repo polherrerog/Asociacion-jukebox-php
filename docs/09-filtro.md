@@ -1,16 +1,29 @@
 # Bloque 9: Sesiones, Registro y Login
 
-## 1. Encargo del cliente
-Proteger las acciones mediante sesión del servidor, tokens CSRF anti-falsificación y permitir la creación e inicio de sesión de usuarios con contraseñas cifradas.
+## 1. ¿Qué hace este bloque? (Objetivo)
+Gestionar la autenticación de usuarios y el control de sesiones mediante `$_SESSION`. Permite registrar usuarios, iniciar sesión, verificar credenciales y restringir el acceso a páginas privadas redirigiendo a los visitantes no autenticados.
 
-## 2. Archivos modificados y creados
-- `docker/src/lib/sesion.php`: Configuración segura de cookies de sesión (`httponly`, `samesite`) y generación del token CSRF.
-- `docker/src/lib/acceso.php`: Verificación de acceso a páginas privadas.
-- `docker/src/register.php`: Validación de registro, duplicados y hash con `password_hash()`.
-- `docker/src/login.php`: Comprobación de credenciales con `password_verify()`.
-- `docker/src/logout.php`: Destrucción de la sesión mediante `POST`.
+## 2. Archivos utilizados y explicación sencilla
+- **`docker/src/lib/sesion.php`**: Inicializa la sesión con `session_start()`.
+- **`docker/src/lib/acceso.php`**:
+  - `requireLogin()`: Comprueba si existe `$_SESSION['login'] === true`. Si no está presente, redirige a `login.php` y detiene la ejecución con `exit`.
+  - `usuarioActual()`: Devuelve el nombre del usuario conectado almacenado en `$_SESSION['usuario']`.
+- **`docker/src/login.php`**: Formulario de acceso. Comprueba que el usuario y la contraseña no estén vacíos y registra la sesión activa.
+- **`docker/src/register.php`**: Formulario para darse de alta como nuevo usuario.
+- **`docker/src/home.php`**: Página principal privada. Saluda al usuario conectado y ofrece enlaces a cerrar sesión o gestionar canciones.
+- **`docker/src/logout.php`**: Destruye la sesión del servidor y redirige a la pantalla de entrada.
 
-## 3. Pruebas de seguridad
-- Sin Token CSRF: Modificación/Eliminación del campo oculto `csrf` produce una respuesta `403 Forbidden`.
-- Protección de Contraseñas: El archivo `docker/data/usuarios.json` solo almacena el hash seguro generado por `PASSWORD_DEFAULT`, nunca la clave original.
-- Intento de Acceso Directo: Abrir `home.php` sin sesión activa redirige automáticamente a `login.php` (HTTP 303).
+## 3. Pruebas y Capturas
+
+### A. Pantalla de Inicio de Sesión (`login.php`)
+Acceso a `http://localhost:8091/login.php` donde el usuario introduce sus credenciales (`admin` / clave).
+
+![Formulario de Login en el navegador](capturas/bloque-09-login.png)
+
+### B. Panel Privado con Sesión Activa (`home.php`)
+Tras autenticarse con éxito, se redirige a `home.php` mostrando el saludo personalizado y el estado de la sesión.
+
+![Panel Home con sesión iniciada](capturas/bloque-09-home-sesion.png)
+
+## 4. Resultado
+Las páginas privadas quedan protegidas: cualquier intento de entrar directamente a la gestión sin sesión activa redirige inmediatamente al login.
